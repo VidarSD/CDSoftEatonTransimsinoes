@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/conntenedor"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Lectura">
+
+    <EditText
+        android:id="@+id/edCodigo2D"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="100dp"
+        android:layout_weight="1"
+        android:editable="false"
+        android:ems="10"
+        android:hint="Codigo 2D"
+        android:inputType="none"
+        android:maxLength="12" />
+
+    <EditText
+        android:id="@+id/edAIAG"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/edCodigo2D"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="93dp"
+        android:layout_marginEnd="100dp"
+        android:layout_weight="1"
+        android:ems="10"
+        android:hint="AIAG"
+        android:inputType="textPersonName"
+        />
+
+    <EditText
+        android:id="@+id/edLineSet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/edAIAG"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="162dp"
+        android:layout_marginEnd="100dp"
+        android:layout_weight="1"
+        android:ems="10"
+        android:hint="Line Set"
+        android:inputType="textPersonName"
+        android:maxLength="8" />
+
+    <TextView
+        android:id="@+id/tvCantidad"
+        android:layout_width="218dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="231dp"
+        android:layout_marginEnd="100dp"
+        android:text="/"
+        android:textSize="18sp" />
+
+    <Button
+        android:id="@+id/btSiguiente"
+        android:layout_width="141dp"
+        android:layout_height="41dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="279dp"
+        android:layout_marginEnd="100dp"
+        android:layout_weight="1"
+        android:text="Siguiente" />
+
+    <Button
+        android:id="@+id/btCancelar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="344dp"
+        android:layout_marginEnd="100dp"
+        android:layout_weight="1"
+        android:onClick="cerrar"
+        android:text="Cancelar" />
+
+    <Button
+        android:id="@+id/btLimpiar"
+        android:layout_width="51dp"
+        android:layout_height="47dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="49dp"
+        android:layout_marginTop="418dp"
+        android:layout_weight="1"
+        android:background="@drawable/trash"
+        android:onClick="limpiarClick" />
+</RelativeLayout>

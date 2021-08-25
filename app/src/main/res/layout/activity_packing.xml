@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Packing">
+
+    <EditText
+        android:id="@+id/edtCodigo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="29dp"
+        android:layout_marginTop="41dp"
+        android:layout_weight="1"
+        android:ems="10"
+        android:hint="Código de Barras"
+        android:inputType="number" />
+
+    <Button
+        android:id="@+id/btCodigo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="39dp"
+        android:layout_marginEnd="5dp"
+        android:layout_toEndOf="@+id/edtCodigo"
+        android:layout_weight="1"
+        android:onClick="btnCodigoBarras_Click"
+        android:text=">>" />
+
+    <TextView
+        android:id="@+id/tvCliente"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="29dp"
+        android:layout_marginTop="108dp"
+        android:layout_marginEnd="-27dp"
+        android:text="Cliente"
+        android:textSize="16sp" />
+
+    <Spinner
+        android:id="@+id/cbCliente"
+        android:layout_width="253dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="29dp"
+        android:layout_marginTop="139dp"
+        android:layout_marginEnd="112dp" />
+
+    <TextView
+        android:id="@+id/tvDestino"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="29dp"
+        android:layout_marginTop="172dp"
+        android:text="Destino"
+        android:textSize="16sp" />
+
+    <Spinner
+        android:id="@+id/cbDestino"
+        android:layout_width="253dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="29dp"
+        android:layout_marginTop="203dp"
+        android:layout_marginEnd="112dp" />
+
+    <EditText
+        android:id="@+id/edNoDelivery"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="29dp"
+        android:layout_marginTop="247dp"
+        android:layout_weight="1"
+        android:ems="10"
+        android:hint="Número de Delivery"
+        android:inputType="number" />
+
+    <EditText
+        android:id="@+id/edNoPzas"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="29dp"
+        android:layout_marginTop="307dp"
+        android:layout_weight="1"
+        android:ems="10"
+        android:hint="Número de Piezas"
+        android:inputType="number" />
+
+    <Button
+        android:id="@+id/btPiezas"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="307dp"
+        android:layout_marginEnd="5dp"
+        android:layout_toEndOf="@+id/edNoPzas"
+        android:layout_weight="1"
+        android:onClick="btPiezas_Click"
+        android:text=">>" />
+
+    <Button
+        android:id="@+id/btLimpiar"
+        android:layout_width="51dp"
+        android:layout_height="47dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="137dp"
+        android:layout_marginTop="391dp"
+        android:layout_weight="1"
+        android:background="@drawable/trash"
+        android:onClick="btLimpiar_Click" />
+
+</RelativeLayout>
