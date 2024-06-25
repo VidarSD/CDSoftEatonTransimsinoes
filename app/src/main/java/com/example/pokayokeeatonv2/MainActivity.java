@@ -1,17 +1,27 @@
 package com.example.pokayokeeatonv2;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
+import android.Manifest;
 import android.content.ContentValues;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.os.Environment;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.pokayokeeatonv2.Modelos.ModeloBD;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.sql.ResultSet;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -30,6 +40,11 @@ public class MainActivity extends AppCompatActivity implements config.DatosCuadr
         edUser = findViewById(R.id.edtUSER);
         edPass = findViewById(R.id.edtPass);
         edUser.requestFocus();
+        if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+        } else {
+            ActivityCompat.requestPermissions(MainActivity.this,
+                    new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 9);
+        }
         crearUserDefault();
 
         try{
@@ -39,6 +54,13 @@ public class MainActivity extends AppCompatActivity implements config.DatosCuadr
         catch(Exception ex){
             Toast.makeText(this, ex.getMessage(), Toast.LENGTH_SHORT).show();
         }
+        try {
+            copyAppDbToDownloadFolder();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+
     }
     private void checkEstado(){
         ModeloBD adminBD = new ModeloBD(this, "Eaton", null, 1);
@@ -160,5 +182,28 @@ public class MainActivity extends AppCompatActivity implements config.DatosCuadr
             BD.insert("usuarios", null, add);
         }
         BD.close();
+    }
+
+
+
+    public void copyAppDbToDownloadFolder() throws IOException {
+        try {
+            File backupDB = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "EatonTransimisiones"); // for example "my_data_backup.db"
+            File currentDB = getApplicationContext().getDatabasePath("Eaton"); //databaseName=your current application database name, for example "my_data.db"
+            if (((File) currentDB).exists()) {
+                FileInputStream fis = new FileInputStream(currentDB);
+                FileOutputStream fos = new FileOutputStream(backupDB);
+                fos.getChannel().transferFrom(fis.getChannel(), 0, fis.getChannel().size());
+                // or fis.getChannel().transferTo(0, fis.getChannel().size(), fos.getChannel());
+                fis.close();
+                fos.close();
+                Log.i("Database successfully", " copied to download folder");
+                Toast.makeText(this, "Database successfully copied to download folder", Toast.LENGTH_SHORT).show();
+               // return true;
+            } else   Toast.makeText(this, "DB NOT FOUND ", Toast.LENGTH_LONG).show();
+        } catch (IOException e) {
+//            Log.d("Copying Database", "fail, reason:", e);
+            Toast.makeText(this, "Exporting DB has failed " +e, Toast.LENGTH_LONG).show();
+        }
     }
 }

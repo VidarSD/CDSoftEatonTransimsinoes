@@ -7,6 +7,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
@@ -26,6 +27,7 @@ public class Packing extends AppCompatActivity {
     Button btCodigo, btPiezas;
     ArrayList<String> lClientes, lDestinos;
     ArrayAdapter<String> adapter;
+    long Folio = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,7 +45,21 @@ public class Packing extends AppCompatActivity {
         edNoDelivery.setEnabled(false);
         edNoPzas.setEnabled(false);
         btPiezas.setEnabled(false);
+
+        ModeloBD adminBD = new ModeloBD(this, "Eaton", null, 1);
+        SQLiteDatabase BD = adminBD.getWritableDatabase();
+        ContentValues cv= new ContentValues();
+        cv.put("Ftype","A");
+        Folio = BD.insert("Folio",null,cv);
+        Toast.makeText(this, String.valueOf(Folio)+"Folio ", Toast.LENGTH_LONG).show();
+        Log.v("El folio",String.valueOf(Folio));
+
+
+
+
         validar();
+
+
         cbCliente.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -86,7 +102,7 @@ public class Packing extends AppCompatActivity {
             combo.setAdapter(adapter);
         }
         catch (Exception ex){
-            Toast.makeText(this, "" + ex.getMessage(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Error Llenando Clientes" + ex.getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
     private void Clientes(){
@@ -118,6 +134,9 @@ public class Packing extends AppCompatActivity {
             BD.insert("clientes", null, add);
             //8
             add.put("Nombre", "Blue Bird");
+            BD.insert("clientes", null, add);
+
+            add.put("Nombre", "ELC");
             BD.insert("clientes", null, add);
         }
         BD.close();
@@ -223,6 +242,11 @@ public class Packing extends AppCompatActivity {
             add.put("IDCliente", 8);
             add.put("NoEtiquetas", 2);
             BD.insert("destinos", null, add);
+
+            add.put("Nombre", "ELC");
+            add.put("IDCliente", 9);
+            add.put("NoEtiquetas", 2);
+            BD.insert("destinos", null, add);
         }
         BD.close();
     }
@@ -264,9 +288,11 @@ public class Packing extends AppCompatActivity {
             Datos.add(edNoPzas.getText().toString());
             Datos.add(edtCodigo.getText().toString());
             Datos.add(cbCliente.getSelectedItem().toString());
+            Datos.add(String.valueOf(Folio));
             Intent intent = new Intent(this, Lectura.class);
             intent.putExtra("datos", Datos);
             startActivity(intent);
+            finish();
         }
     }
     private void validar(){
@@ -289,14 +315,16 @@ public class Packing extends AppCompatActivity {
                 return false;
             }
         });
-        /*edNoPzas.setOnKeyListener(new View.OnKeyListener() {
+        edNoPzas.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 if((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)){
-                    //validaPiezas();
+                    validaPiezas();
                 }
                 return false;
             }
-        });*/
+        });
+
+
     }
 }
